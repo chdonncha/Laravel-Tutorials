@@ -1,6 +1,12 @@
 @extends('layouts.main')
 @section('content')
-	{{{ $data['last_name'] }}}
+	@if (isset($data['last_name']))
+		{{{ $data['last_name']}}}
+	@else
+		no last name set
+	@endif
 
-	@if (isset())
+	@foreach ($data as $item)
+		<li>{{{ $item }}}</li>
+	@endforeach
 @stop
