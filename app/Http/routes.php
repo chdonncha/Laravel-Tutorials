@@ -19,28 +19,8 @@
 * /todos/create - create new list
 */
 
-Route::get('/', function ()
-{
-	return view('todos.index');
-});
+Route::get('/', 'TodoListController@index');
+/*Route::get('/todos', 'TodoListController@index');
+Route::get('/todos/{id}', 'TodoListController@show');*/
 
-Route::get('/todos', function ()
-{
-	return view('todos.index');
-});
-
-Route::get('/todos/{id}', function($id)
-{
-	return view('todos.show')->withId($id);
-});
-
-/*Route::get('/', function () 
-{
-	$data = ['name' => 'jane', 'email' => 'jane@doe.com']
-    return view('welcome')->with('name', 'friend');
-});
-
-Route::get('/welcome/{name?}', function($name = 'world') 
-{
-    return view('welcome')->with('name', $name);
-});*/
+Route::resource('todos', 'TodoListController');
