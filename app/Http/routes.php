@@ -11,13 +11,23 @@
 |
 */
 
-Route::get('/', function () 
+Route::get('/', function ()
 {
-	$data = ['name' => 'jane', 'email' => 'jane@doe.com'];
-    return view('welcome')->with($data);
+	$data = [
+		'name' => 'jane',
+		'email' => 'jane@doe.com',
+		'location' => 'Florida'
+		];
+	return view('welcome')->withData($data);
+});
+
+/*Route::get('/', function () 
+{
+	$data = ['name' => 'jane', 'email' => 'jane@doe.com']
+    return view('welcome')->with('name', 'friend');
 });
 
 Route::get('/welcome/{name?}', function($name = 'world') 
 {
     return view('welcome')->with('name', $name);
-});
+});*/
