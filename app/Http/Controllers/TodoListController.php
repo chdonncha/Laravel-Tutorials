@@ -23,14 +23,15 @@ class TodoListController extends Controller
 
     public function create()
     {
-    	$list = new TodoList();
-    	$list->name = "Another List";
-    	$list->save();
-    	return "Create a new List";
+    	return view('todos.create');
     }
 
    	public function store()
    	{
-
+   		return "Creating new list";
+   		// $list = new TodoList();
+    	// $list->name = "Another List";
+    	// $list->save();
+    	// return "Create a new List";
    	}
 }
