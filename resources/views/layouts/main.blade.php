@@ -14,10 +14,7 @@
 	<!-- Header and Nav -->
 
 	<nav class="top-bar" data-topbar>
-		<ul class="title-area">
-			<li class="name">
-				<h1><a href="#">ODOT</a></h1>
-			</li>
+			<h3><a href="#">ODOT</a></h3
 		</ul>
 	</nav>
 

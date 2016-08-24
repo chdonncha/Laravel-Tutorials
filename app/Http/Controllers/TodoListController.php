@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers;
 
-
-
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 use App\TodoList;
 use App\User;
 
 class TodoListController extends Controller
 {
+
+	public function _construct()
+	{
+		$this->beforeFilter('csrf', array('on' => 'post'));
+	}
+
     public function index()
     {
     	$todo_lists = TodoList::all();
@@ -28,10 +34,20 @@ class TodoListController extends Controller
 
    	public function store()
    	{
-   		return "Creating new list";
-   		// $list = new TodoList();
-    	// $list->name = "Another List";
-    	// $list->save();
-    	// return "Create a new List";
+   		$name = input::get('title');
+   		$list = new TodoList();
+    	$list->name = $name;
+    	$list->save();
+    	return Redirect::route('todos.index');
+   	}
+
+   	public function update()
+   	{
+
+   	}
+
+   	public function destroy()
+   	{
+   		
    	}
 }
