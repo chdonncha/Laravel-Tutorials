@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 use App\TodoList;
 use App\User;
 
@@ -34,6 +35,19 @@ class TodoListController extends Controller
 
    	public function store()
    	{
+   		// define rules
+   		$rules = array(
+   				'title' => array('required', 'unique:todo_lists,name')
+   			);
+
+   		// pass input to validator
+   		$validator = Validator::make(Input::all(), $rules);
+
+   		// test if input is valid
+   		if ($validator->fails()) {
+   			return Redirect::route('todos.create');
+   		}
+
    		$name = input::get('title');
    		$list = new TodoList();
     	$list->name = $name;
@@ -48,6 +62,6 @@ class TodoListController extends Controller
 
    	public function destroy()
    	{
-   		
+
    	}
 }
