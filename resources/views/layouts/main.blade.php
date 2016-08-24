@@ -13,6 +13,12 @@
 
 	<!-- Header and Nav -->
 
+	@if (Session::has('message'))
+		<div class-"alert-box success">
+		{{{ Session::get('message')}}}
+		</div>
+	@endif
+
 	<nav class="top-bar" data-topbar>
 			<h3><a href="#">ODOT</a></h3
 		</ul>
