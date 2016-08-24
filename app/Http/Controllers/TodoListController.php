@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\View;
 use App\TodoList;
 use App\User;
 
 class TodoListController extends Controller
 {
 
-	public function _construct()
+	public function _construct($id)
 	{
 		$this->beforeFilter('csrf', array('on' => 'post'));
 	}
@@ -28,12 +29,18 @@ class TodoListController extends Controller
     	return view('todos.show')->withList($list);
     }
 
-    public function create()
+    	public function edit($id)
+	{
+		$list = TodoList::findOrFail($id);
+		return View::make('todos.edit')->withList($list);
+	}
+
+    public function create($id)
     {
     	return view('todos.create');
     }
 
-   	public function store()
+   	public function store($id)
    	{
    		// define rules
    		$rules = array(
@@ -55,12 +62,12 @@ class TodoListController extends Controller
     	return Redirect::route('todos.index')->withMessage('List Was Created');
    	}
 
-   	public function update()
+   	public function update($id)
    	{
-
+   		//
    	}
 
-   	public function destroy()
+   	public function destroy($id)
    	{
 
    	}
