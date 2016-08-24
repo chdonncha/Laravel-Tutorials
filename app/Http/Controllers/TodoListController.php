@@ -14,7 +14,7 @@ class TodoListController extends Controller
 
 	public function _construct($id)
 	{
-		$this->beforeFilter('csrf', array('on' => 'post'));
+		$this->beforeFilter('csrf', array('on' => ['post', 'put']));
 	}
 
     public function index()
@@ -64,7 +64,24 @@ class TodoListController extends Controller
 
    	public function update($id)
    	{
-   		//
+   		// define rules
+   		$rules = array(
+   				'name' => array('required', 'unique:todo_lists')
+   			);
+
+   		// pass input to validator
+   		$validator = Validator::make(Input::all(), $rules);
+
+   		// test if input is valid
+   		if ($validator->fails()) {
+   			return Redirect::route('todos.edit', $id)->withErrors($validator)->withInput();
+   		}
+
+   		$name = input::get('name');
+   		$list = TodoList::findOrFail($id);
+    	$list->name = $name;
+    	$list->update();
+    	return Redirect::route('todos.index')->withMessage('List Was Updated');
    	}
 
    	public function destroy($id)
