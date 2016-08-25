@@ -86,6 +86,8 @@ class TodoListController extends Controller
 
    	public function destroy($id)
    	{
+   		$todo_list = TodoList::findOrFail($id)->delete();
 
+   		return Redirect::route('todos.index')->withMessage('item Deleted!');
    	}
 }

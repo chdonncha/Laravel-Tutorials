@@ -5,9 +5,14 @@
 		<h4>{{ link_to_route('todos.show', $list->name, [$list->id]) }}</h4>
 		<ul class="no-bullet button-group " >
 			<li>
-				{{link_to_route('todos.edit', 'edit', [$list->id], ['class' => 'tiny button'])}}
+				{{ link_to_route('todos.edit', 'edit', [$list->id], ['class' => 'tiny button'])}}
+			</li>
+			<li>
+				{{ Form::model($list, [ 'route' => ['todos.destroy', $list->id], 'method' => 'delete' ]) }}
+					{{ Form::button('destroy', ['type' => 'submit', 'class' => 'tiny alert button'])}}
+				{{ Form::close() }}
 			</li>
 		</ul>
 	@endforeach
-	{{ link_to_route('todos.create', 'Create New List', null, ['class' => 'success button'])}}
+	{{ link_to_route('todos.create', 'Create New List', null, ['class' => 'success button']) }}
 @stop
