@@ -30,3 +30,7 @@ Route::get('/db', function()
 });
 
 Route::resource('todos', 'TodoListController');
+
+// Event::listen('illuminate.query', function($query){
+// 	var_dump($query);
+// });

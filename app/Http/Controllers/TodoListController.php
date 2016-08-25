@@ -25,8 +25,11 @@ class TodoListController extends Controller
 
     public function show($id)
     {
-    	$list = TodoList::find($id);
-    	return view('todos.show')->withList($list);
+    	$list = TodoList::findOrFail($id);
+    	$items = $list->listItems()->get();
+       	return view('todos.show')
+       		->withList($list)
+       		->withItems($items);
     }
 
     	public function edit($id)
