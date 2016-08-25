@@ -35,16 +35,16 @@ class TodoListController extends Controller
 		return View::make('todos.edit')->withList($list);
 	}
 
-    public function create($id)
+    public function create()
     {
     	return view('todos.create');
     }
 
-   	public function store($id)
+   	public function store()
    	{
    		// define rules
    		$rules = array(
-   				'title' => array('required', 'unique:todo_lists,name')
+   				'name' => array('required', 'unique:todo_lists')
    			);
 
    		// pass input to validator
@@ -55,7 +55,7 @@ class TodoListController extends Controller
    			return Redirect::route('todos.create')->withErrors($validator)->withInput();
    		}
 
-   		$name = input::get('title');
+   		$name = input::get('name');
    		$list = new TodoList();
     	$list->name = $name;
     	$list->save();
