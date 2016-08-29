@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 use App\TodoList;
+use App\TodoItem;
 use App\User;
 
 class TodoItemController extends Controller
@@ -52,12 +53,33 @@ class TodoItemController extends Controller
       public function edit($list_id, $item_id)
     {
     	$list = TodoItem::findOrFail($item_id);
-    	return View::make('items.edit')->withTodoItem($item);
+    	return View::make('items.edit')
+    		->withTodoItem($item)
+    		->withTodoListId($list_id);
     }
 
-      public function update($id)
+      public function update($list_id, $item_id)
     {
-    	
+    	// define rules
+   		$rules = array(
+   				'content' => array('required')
+   			);
+
+   		// pass input to validator
+   		$validator = Validator::make(Input::all(), $rules);
+
+   		// test if input is valid
+   		if ($validator->fails()) {
+   			return Redirect::route('todos.items.edit', [$list_id, $item_id])
+   				->withErrors($validator)
+   				->withInput();
+   		}
+
+   		$item = TodoItem::findOrFail($id);
+    	$item->content = Input::get('content');
+    	$item->update();
+    	return Redirect::route('todos.show', $list_id)
+    		->withMessage('Item Was Updated');
     }
 
 }
