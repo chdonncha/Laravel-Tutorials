@@ -20,6 +20,8 @@
 */
 
 Route::get('/', 'TodoListController@index');
+Route::resource('todos', 'TodoListController');
+Route::resource('todos.items', 'TodoItemController', ['except' => ['index'] ]);
 /*Route::get('/todos', 'TodoListController@index');
 Route::get('/todos/{id}', 'TodoListController@show');*/
 
@@ -29,7 +31,7 @@ Route::get('/db', function()
 	return $result->name;
 });
 
-Route::resource('todos', 'TodoListController');
+//Route::resource('todos', 'TodoListController');
 
 // Event::listen('illuminate.query', function($query){
 // 	var_dump($query);
