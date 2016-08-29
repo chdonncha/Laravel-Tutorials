@@ -5,6 +5,11 @@
 		@foreach ($items as $item)
 			<h4>{{{ $item->content }}}</h4>
 		@endforeach
-		<p>{{ link_to_route('todos.index', 'back')}}
+		<ul class="no-bullet button-group">
+			<li>
+				{{ link_to_route('todos.items.create', 'add new item', [$list->id], ['class' => 'button success'])}}
+			</li>
+		</ul>
+		<p>{{ link_to_route('todos.index', 'back', null, ['class' => 'button'])}}</p>
 	</div>
 @stop
