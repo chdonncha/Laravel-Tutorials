@@ -21,15 +21,15 @@
 
 Route::get('/', 'TodoListController@index');
 Route::resource('todos', 'TodoListController');
-Route::resource('todos.items', 'TodoItemController', ['except' => ['index'] ]);
+Route::resource('todos.items', 'TodoItemController', ['except' => ['index', 'show'] ]);
 /*Route::get('/todos', 'TodoListController@index');
 Route::get('/todos/{id}', 'TodoListController@show');*/
 
-Route::get('/db', function()
-{
-	$result = DB::table('todo_lists')->where('name', 'Your List')->first();
-	return $result->name;
-});
+// Route::get('/db', function()
+// {
+// 	$result = DB::table('todo_lists')->where('name', 'Your List')->first();
+// 	return $result->name;
+// });
 
 //Route::resource('todos', 'TodoListController');
 
