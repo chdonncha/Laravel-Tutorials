@@ -12,6 +12,14 @@ use App\User;
 
 class TodoItemController extends Controller
 {
+	public function _construct()
+	{
+		// protects in creation using csrf token
+		// will throw a token mismatch to prevent hacked tokens
+		// test
+		$this->beforeFilter('csrf', array('on' => ['post', 'put', 'delete']));
+	}
+
     public function create($list_id)
     {
     	$todo_list = TodoList::findOrFail($list_id);
@@ -82,4 +90,10 @@ class TodoItemController extends Controller
     		->withMessage('Item Was Updated');
     }
 
+    public function destroy($list_id, $item_id)
+    {
+    	$item = TodoItem::findOrFail($item_id)->delete();
+    	return Redirect::route('todos.show', $list_id)
+    		->withMessage('Item Deleted!');
+    }
 }

@@ -14,7 +14,7 @@ class TodoListController extends Controller
 
 	public function _construct($id)
 	{
-		$this->beforeFilter('csrf', array('on' => ['post', 'put']));
+		$this->beforeFilter('csrf', array('on' => ['post', 'put', 'delete']));
 	}
 
     public function index()
