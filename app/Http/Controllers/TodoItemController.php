@@ -60,12 +60,19 @@ class TodoItemController extends Controller
     */
       public function edit($list_id, $item_id)
     {
-    	$list = TodoItem::findOrFail($item_id);
+    	$item = TodoItem::findOrFail($item_id);
     	return View::make('items.edit')
     		->withTodoItem($item)
     		->withTodoListId($list_id);
     }
 
+  /**
+    * Show the form for editing the speicfied resource.
+    *
+    * @param int $list_id
+    * @param int $item_id
+    * @return Response
+    */
       public function update($list_id, $item_id)
     {
     	// define rules
