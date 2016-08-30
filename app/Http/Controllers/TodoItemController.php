@@ -75,7 +75,7 @@ class TodoItemController extends Controller
    				->withInput();
    		}
 
-   		$item = TodoItem::findOrFail($id);
+   		$item = TodoItem::findOrFail($item_id);
     	$item->content = Input::get('content');
     	$item->update();
     	return Redirect::route('todos.show', $list_id)
